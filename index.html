@@ -7,17 +7,21 @@
   </head>
   
   <body>
-    <div>
-      <h2>TODO List</h2>
+    <div class="container">
+      <h2>What Needs to Get Done?</h2>
       <input type="text" id="newTaskInput" placeholder="Add a task...">
-      <span onclick="createTask()">Add Task</span>
+      <div>
+        <span id="taskButton" onclick="createTask()">ADD TASK</span>
+      </div>
     </div>
 
-    <ul id="todoList">
-      <li>Task 1...</li>
-      <li>Task 2...</li>
-      <li>Task 3...</li>
-    </ul>
+    <div class="container">
+      <ul id="todoList">
+        <li>Task 1...</li>
+        <li>Task 2...</li>
+        <li>Task 3...</li>
+      </ul>
+    </div>
     
     <script src="todo.js" async defer></script>
   </body>

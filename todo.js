@@ -1,5 +1,10 @@
 'use strict';
 
+// -- GLOBAL VARIABLES --
+
+var closeButtonClasses = 'closeButton';
+var closeButton = '\u2716';
+
 // -- INITIAL SETUP --
 
 // Create and append close button to each existing list item.
@@ -7,8 +12,8 @@ var nodes = document.getElementsByTagName('LI');
 
 for (var i = 0; i < nodes.length; i++) {
     var span = document.createElement('SPAN');
-    var txt = document.createTextNode('\u00D7');
-    span.className = 'closeButton';
+    var txt = document.createTextNode(closeButton);
+    span.className = closeButtonClasses;
     span.appendChild(txt);
     nodes[i].appendChild(span);
 }
@@ -25,13 +30,13 @@ list.addEventListener('click', function(ev) {
 var remove = document.getElementsByTagName('LI');
 for (var i = 0; i < remove.length; i++) {
     remove[i].addEventListener('click', function(ev) {
-        if (ev.target.className == 'closeButton') {
+        if (ev.target.className == closeButtonClasses) {
             ev.target.parentNode.remove();
         }
     }, false);
 }
 
-// -- MAIN NEW TASK FUNCTION --
+// -- NEW TASK FUNCTION --
 
 // Create a new list item when 'Add Task' is clicked.
 function createTask() {
@@ -53,8 +58,8 @@ function createTask() {
 
     // Append close button and add remove node event to new item.
     var span = document.createElement('SPAN');
-    var txt = document.createTextNode('\u00D7');
-    span.className = 'closeButton';
+    var txt = document.createTextNode(closeButton);
+    span.className = closeButtonClasses;
     span.appendChild(txt);
     span.addEventListener('click', function(ev) {
         ev.target.parentNode.remove();
