@@ -5,12 +5,19 @@
 var closeButtonClasses = 'closeButton';
 var closeButton = '\u2716';
 
+
 // -- UTILITY FUNCTIONS --
+
 function closeWindow() {
     const remote = require('electron').remote
     let w = remote.getCurrentWindow()
     w.close()
 }
+
+function setFocusAddTaskField(){
+    document.getElementById("newTaskInput").focus();
+}
+
 
 // -- INITIAL SETUP --
 
@@ -43,6 +50,7 @@ for (var i = 0; i < remove.length; i++) {
     }, false);
 }
 
+
 // -- NEW TASK FUNCTION --
 
 // Create a new list item when 'Add Task' is clicked.
@@ -72,4 +80,7 @@ function createTask() {
         ev.target.parentNode.remove();
     });
     li.appendChild(span);
+
+    // Focus on add task field.
+    setFocusAddTaskField();
 }
