@@ -14,7 +14,7 @@
 
 /* Add Task button styling. */
 
-#taskButton {
+.smallButton {
   background-color: white;
   border: none;
   color: black;

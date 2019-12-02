@@ -5,6 +5,13 @@
 var closeButtonClasses = 'closeButton';
 var closeButton = '\u2716';
 
+// -- UTILITY FUNCTIONS --
+function closeWindow() {
+    const remote = require('electron').remote
+    let w = remote.getCurrentWindow()
+    w.close()
+}
+
 // -- INITIAL SETUP --
 
 // Create and append close button to each existing list item.
