@@ -7,25 +7,31 @@
   </head>
   
   <body>
+    <!-- Header, input field, and 'ADD TASK' button. -->
     <div class="container">
-      <h2>What Needs to Get Done?</h2>
-      <input type="text" id="newTaskInput" placeholder="Add a task..." autofocus>
+      <h2>What would you like to do?</h2>
+      <input type="text" id="newTaskInput" placeholder="Add task..." autofocus>
       <div>
-        <span class="smallButton" id="newTaskInput" onclick="createTask()">ADD TASK</span>
+        <span class="smallButton" id="newTaskInput" onclick="createTask()" maxlength="40">ADD TASK</span>
+        
+        <!-- Input error message. Hidden by default. Content defined by todo.js > displayErrorMessage(). -->
+        <span id="inputErrorMessage"></span>
       </div>
     </div>
 
+    <!-- Task list. -->
     <div class="container">
       <ul id="todoList">
         <li>Add a new task or delete this one...</li>
       </ul>
     </div>
 
+    <!-- Exit button. -->
     <div class="container">
       <span class="smallButton" onclick="closeWindow()">EXIT</span>
     </div>
     
-    <script src="todo.js" async defer></script>
+    <script src="todo.js" defer></script>
   </body>
 
 </html>

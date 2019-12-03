@@ -1,7 +1,6 @@
-/* Global styles. */
-
+/* General styles. */
 * {
-  background-color: black;
+  background-color: rgb(12, 12, 12);
   color: white;
   font-family: sans-serif;
   user-select: none;
@@ -12,8 +11,7 @@
   margin: 10px 10px;
 }
 
-/* Add Task button styling. */
-
+/* Add Task and Exit button styling. */
 .smallButton {
   background-color: white;
   border: none;
@@ -26,8 +24,11 @@
   margin: 20px 0px;
 }
 
-/* To-do list styling. */
+.smallButton:hover {
+  background-color: rgb(220, 220, 220);
+}
 
+/* To-do list styling. */
 #todoList {
   list-style: none;
   margin: 0;
@@ -40,34 +41,42 @@
 }
 
 #todoList > li:nth-of-type(even) {
-  background-color: rgb(40, 40, 40) ;
+  background-color: rgb(60, 60, 60) ;
 }
 
 #todoList > li:nth-of-type(odd) {
-  background-color: rgb(30, 30, 30) ;
+  background-color: rgb(40, 40, 40) ;
 }
 
 #todoList > li:hover {
-  background: rgb(20, 20, 20);
+  background: rgb(30, 30, 30);
   transition: 0.3s;
 }
 
 /* Close button styling. */
-
 .closeButton {
   float: right;
+  color: rgb(231, 39, 39);
   background-color: rgba(0, 0, 0, 0);
   font-size: 11px;
 }
 
 .closeButton:hover {
-  color: red;
+  color: rgb(138, 14, 14);
   transition: 0.3s;
 }
 
-/* Add check mark to task when clicked (checked class is toggled. */
-
+/* Add check mark to task when clicked ('checked' class is toggled in todo.js). */
 .checked::before {
-  content: '\2713\00A0';
+  color: rgb(56, 230, 56);
+  content: '\2713\00A0\00A0';
   font-size: 11px;
+}
+
+/* Modal styling for user input errors. */
+#inputErrorMessage {
+  display: none;
+  color: rgb(231, 39, 39);
+  margin-left: 5px;
+  font-size: 12px;
 }
