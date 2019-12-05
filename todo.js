@@ -35,7 +35,7 @@ function closeErrorMessage() {
 // Receive window size from main process when window is resized.
 // Set height of todo list accordingly to avoid main window scrollbar.
 require('electron').ipcRenderer.on('async-resize', (event, message) => {
-    document.getElementById('todoList').style.height = ((message * .60).toString() + 'px');
+    document.getElementById('todoList').style.height = ((message - 220).toString() + 'px');
 });
 
 
