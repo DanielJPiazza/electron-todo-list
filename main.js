@@ -19,6 +19,11 @@ function createWindow() {
 		
 	// Open the DevTools.
 	// win.webContents.openDevTools()
+
+	// Send window size to renderer process when window is resized.
+	win.on('resize', () => {
+		win.webContents.send('async-resize', win.getSize()[1]);
+	});
 	
 	// Emitted when the window is closed.
 	win.on('closed', () => {
