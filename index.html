@@ -12,9 +12,11 @@
       <h2>What would you like to do?</h2>
       <input type="text" id="newTaskInput" placeholder="Add task..." autofocus>
       <div>
-        <span class="smallButton" id="newTaskInput" onclick="createTask()" maxlength="40">ADD TASK</span>
+        <span class="smallButton" onclick="createTask()" maxlength="40">Add Task</span>
+        <span class="smallButton" id="exitButton" onclick="closeWindow()">Exit</span>
         
         <!-- Input error message. Hidden by default. Content defined by todo.js > displayErrorMessage(). -->
+        <br>
         <span id="inputErrorMessage"></span>
       </div>
     </div>
@@ -24,11 +26,6 @@
       <ul id="todoList">
         <li>Add a new task or delete this one...</li>
       </ul>
-    </div>
-
-    <!-- Exit button. -->
-    <div class="container">
-      <span class="smallButton" onclick="closeWindow()">EXIT</span>
     </div>
     
     <script src="todo.js" defer></script>
