@@ -7,17 +7,27 @@
   </head>
   
   <body>
-    <!-- Header, input field, and 'ADD TASK' button. -->
+    
     <div class="container">
       <h2>What would you like to do?</h2>
+      
+      <!-- Task input field. -->
       <input type="text" id="newTaskInput" placeholder="Add task..." autofocus>
+      
       <div>
+        <!-- 'Add Task' and 'Exit' buttons. -->
         <span class="smallButton" onclick="createTask()" maxlength="40">Add Task</span>
         <span class="smallButton" id="exitButton" onclick="closeWindow()">Exit</span>
-        
-        <!-- Input error message. Hidden by default. Content defined by todo.js > displayErrorMessage(). -->
-        <br>
-        <span id="inputErrorMessage"></span>
+
+        <!-- User input error modal. -->
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close-button">&times;</span>
+
+                <!-- Input error message. Hidden by default. Content defined by todo.js > toggleModal(message) -->
+                <span id="inputErrorMessage"></span>
+            </div>
+        </div>
       </div>
     </div>
 
@@ -29,6 +39,6 @@
     </div>
     
     <script src="todo.js" defer></script>
+  
   </body>
-
 </html>

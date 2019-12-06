@@ -21,15 +21,10 @@ function setFocusAddTaskField(){
     document.getElementById('newTaskInput').focus();
 }
 
-function openErrorMessage(message) {
-    document.getElementById('inputErrorMessage').textContent = message;
-    inputErrorMessage.style.display = 'inline-block';
+function removeFocusAddTaskField() {
+    document.getElementById('newTaskInput').blur();
 }
 
-function closeErrorMessage() {
-    document.getElementById('inputErrorMessage').textContent = '';
-    inputErrorMessage.style.display = 'none';
-}
 
 // -- IPC COMMUNICATION WITH MAIN.JS --
 // Receive window size from main process when window is resized.
@@ -37,6 +32,23 @@ function closeErrorMessage() {
 require('electron').ipcRenderer.on('async-resize', (event, message) => {
     document.getElementById('todoList').style.height = ((message - 220).toString() + 'px');
 });
+
+// -- ERROR MODAL HANDLING --
+const modal = document.querySelector(".modal");
+const modalCloseButton = document.querySelector(".modal-close-button");
+
+function toggleModal(message) {     
+    document.getElementById('inputErrorMessage').textContent = message.toString();
+    modal.classList.toggle("show-modal");
+    
+    if (modal.classList.contains('show-modal')) {
+        removeFocusAddTaskField();
+    } else {
+        setFocusAddTaskField();
+    }
+}
+
+modalCloseButton.addEventListener("click", toggleModal);
 
 
 // -- INITIAL SETUP --
@@ -78,9 +90,6 @@ addTaskButton.addEventListener('keypress', function(e) {
 // -- NEW TASK FUNCTION --
 // Create a new list item when 'Add Task' is clicked.
 function createTask() {
-    // Clear any displayed error messages.
-    closeErrorMessage();
-    
     // Gather user input.
     var inputValue = document.getElementById('newTaskInput').value.trim();
 
@@ -88,11 +97,7 @@ function createTask() {
     var inputRegex = new RegExp('^\\S');
     if (!inputRegex.test(inputValue)) {
         // If check fails, display error message.
-        openErrorMessage('Tasks must contain text. Please enter task again.');
-        
-        // Focus on add task field.
-        setFocusAddTaskField();
-        
+        toggleModal('Tasks must contain text.');
         return false;
     }
 
