@@ -70,12 +70,12 @@ require('electron').ipcRenderer.on('async-resize', (event, message) => {
 
 // -- ERROR MODAL HANDLING --
 
-const modal = document.querySelector(".modal");
-const modalCloseButton = document.querySelector(".modal-close-button");
+const modal = document.querySelector('.modal');
+const modalCloseButton = document.querySelector('.modal-close-button');
 
 function toggleModal(message) {     
-    document.getElementById('inputErrorMessage').textContent = message.toString();
-    modal.classList.toggle("show-modal");
+    document.getElementById('inputErrorMessage').textContent = message;
+    modal.classList.toggle('show-modal');
     
     if (modal.classList.contains('show-modal')) {
         removeFocusAddTaskField();
@@ -84,7 +84,14 @@ function toggleModal(message) {
     }
 }
 
-modalCloseButton.addEventListener("click", toggleModal);
+// Allow mouse click on '.modal-close-button' to close error modal.
+modalCloseButton.addEventListener('click', toggleModal);
+// Allow 'Escape' key to close error modal.
+document.addEventListener('keydown', function(e) {
+    if ((e.which === 27 || e.keyCode === 27) && (modal.classList.contains('show-modal'))) {
+        toggleModal();
+    }
+});
 
 
 // -- NEW TASK FUNCTION --
