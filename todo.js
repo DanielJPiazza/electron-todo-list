@@ -1,17 +1,14 @@
 'use strict';
 
-// -- IMPORTS --
+// -- GLOBAL CONSTANTS --
+
 const remote = require('electron').remote
-
-
-// -- GLOBAL VARIABLES --
 const closeButtonClasses = 'closeButton';
 const closeButton = '\u2716';
-const inputErrorMessage = document.getElementById('inputErrorMessage');
-const addTaskButton = document.getElementById('newTaskInput');
 
 
 // -- UTILITY FUNCTIONS --
+
 function closeWindow() {
     // Not used in todo.js. Called in index.html.
     remote.getCurrentWindow().close()
@@ -25,33 +22,8 @@ function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
 }
 
-
-// -- IPC COMMUNICATION WITH MAIN.JS --
-// Receive window size from main process when window is resized.
-// Set height of todo list accordingly to avoid main window scrollbar.
-require('electron').ipcRenderer.on('async-resize', (event, message) => {
-    document.getElementById('todoList').style.height = ((message - 220).toString() + 'px');
-});
-
-// -- ERROR MODAL HANDLING --
-const modal = document.querySelector(".modal");
-const modalCloseButton = document.querySelector(".modal-close-button");
-
-function toggleModal(message) {     
-    document.getElementById('inputErrorMessage').textContent = message.toString();
-    modal.classList.toggle("show-modal");
-    
-    if (modal.classList.contains('show-modal')) {
-        removeFocusAddTaskField();
-    } else {
-        setFocusAddTaskField();
-    }
-}
-
-modalCloseButton.addEventListener("click", toggleModal);
-
-
 // -- INITIAL SETUP --
+
 // Create and append close button to each existing list item.
 var nodes = document.getElementsByTagName('LI');
 for (var i = 0; i < nodes.length; i++) {
@@ -80,14 +52,43 @@ document.querySelector('UL').addEventListener('click', function(e) {
 }, false);
 
 // Allow 'Enter' key to call createTask().
-addTaskButton.addEventListener('keypress', function(e) {
+document.getElementById('newTaskInput').addEventListener('keypress', function(e) {
     if (e.which === 13 || e.keyCode === 13) {
       createTask();
     }
 }, false);
 
 
+// -- IPC COMMUNICATION WITH MAIN.JS --
+
+// Receive window size from main process when window is resized.
+// Set height of todo list accordingly to avoid main window scrollbar.
+require('electron').ipcRenderer.on('async-resize', (event, message) => {
+    document.getElementById('todoList').style.height = ((message - 220).toString() + 'px');
+});
+
+
+// -- ERROR MODAL HANDLING --
+
+const modal = document.querySelector(".modal");
+const modalCloseButton = document.querySelector(".modal-close-button");
+
+function toggleModal(message) {     
+    document.getElementById('inputErrorMessage').textContent = message.toString();
+    modal.classList.toggle("show-modal");
+    
+    if (modal.classList.contains('show-modal')) {
+        removeFocusAddTaskField();
+    } else {
+        setFocusAddTaskField();
+    }
+}
+
+modalCloseButton.addEventListener("click", toggleModal);
+
+
 // -- NEW TASK FUNCTION --
+
 // Create a new list item when 'Add Task' is clicked.
 function createTask() {
     // Gather user input.
