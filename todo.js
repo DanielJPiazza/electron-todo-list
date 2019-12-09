@@ -148,7 +148,7 @@ function createTask() {
     li.appendChild(txt);
 
     // Toggle 'checked' class on click for new list item.
-    txt.addEventListener('click', function(e) {
+    li.addEventListener('click', function(e) {
         e.target.classList.toggle('checked');
     });
     
