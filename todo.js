@@ -90,6 +90,14 @@ function toggleModal(message) {
 modalCloseButton.addEventListener('click', function(e) {
     toggleModal(null);
 });
+
+// Close error modal if outside is clicked.
+modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+        toggleModal(null);
+    }
+});
+
 // Allow 'Escape' key to close error modal.
 document.addEventListener('keydown', function(e) {
     if ((e.which === 27 || e.keyCode === 27) && (modal.classList.contains('show-modal'))) {
