@@ -74,10 +74,10 @@ function createTaskOnSetup(data) {
 // Load user's saved data and populate task list.
 createTaskOnSetup(userDataArray);
 
-// Allow 'Enter' key to call createTask().
+// Allow 'Enter' key to call createTaskFromForm().
 document.getElementById('newTaskInput').addEventListener('keypress', function(e) {
     if (e.which === 13 || e.keyCode === 13) {
-      createTask();
+      createTaskFromForm();
     }
 }, false);
 
@@ -130,7 +130,7 @@ document.addEventListener('keydown', function(e) {
 // -- NEW TASK FUNCTION --
 
 // Create a new list item when 'Add Task' is clicked.
-function createTask() {
+function createTaskFromForm() {
     // Gather user input.
     var inputValue = document.getElementById('newTaskInput').value.trim();
 
