@@ -60,15 +60,15 @@
   transition: 0.3s;
 }
 
-/* Close button styling. */
-.closeButton {
+/* Remove task button styling. */
+.removeTaskButton {
   float: right;
   color: rgb(231, 39, 39);
   background-color: rgba(0, 0, 0, 0);
   font-size: 11px;
 }
 
-.closeButton:hover {
+.removeTaskButton:hover {
   color: rgb(138, 14, 14);
   transition: 0.3s;
 }
