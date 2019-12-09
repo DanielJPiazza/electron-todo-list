@@ -87,11 +87,13 @@ function toggleModal(message) {
 }
 
 // Allow mouse click on '.modal-close-button' to close error modal.
-modalCloseButton.addEventListener('click', toggleModal);
+modalCloseButton.addEventListener('click', function(e) {
+    toggleModal(null);
+});
 // Allow 'Escape' key to close error modal.
 document.addEventListener('keydown', function(e) {
     if ((e.which === 27 || e.keyCode === 27) && (modal.classList.contains('show-modal'))) {
-        toggleModal();
+        toggleModal(null);
     }
 });
 
