@@ -1,5 +1,6 @@
 'use strict';
 
+
 // -- GLOBAL CONSTANTS --
 
 const remote = require('electron').remote
@@ -21,6 +22,7 @@ function setFocusAddTaskField(){
 function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
 }
+
 
 // -- INITIAL SETUP --
 
