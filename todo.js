@@ -11,8 +11,8 @@ const fs = require('fs');
 const removeTaskButtonClass = 'removeTaskButton';
 const removeTaskButton = '\u2716';
 
-// Input/output
-var userDataArray = fs.readFileSync('userdata.txt').toString().split("\n");
+// Input & output
+var userDataFileName = 'userdata.txt';
 
 // Error modal handling
 const modal = document.querySelector('.modal');
@@ -131,8 +131,13 @@ require('electron').ipcRenderer.on('async-resize', (event, message) => {
 
 // ** INITIAL SETUP & NON-FUNCTION EVENT LISTENERS **
 
-// Load user's saved data and populate task list.
-createTaskOnSetup(userDataArray);
+// Read user data file and create task list on run.
+var userDataArray;
+fs.readFile(userDataFileName, (err, data) => {
+    if (err) console.error(err);
+    userDataArray = data.toString().split('\n');
+    createTaskOnSetup(userDataArray);
+});
 
 // Toggle 'checked' class on clicked list items.
 document.getElementById('todoList').addEventListener('click', function(e) {
