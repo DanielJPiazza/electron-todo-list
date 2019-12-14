@@ -35,7 +35,7 @@ function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
 }
 
-function createTask(data) {
+function createTask(data, source) {
     // Create new list item and append user input.
     var li = document.createElement('LI');
     var txt = document.createTextNode(data);
@@ -58,6 +58,14 @@ function createTask(data) {
         e.target.parentNode.remove();
     });
     li.appendChild(span);
+
+    // If new user task, add to user data array and write array to user data file.
+    if (source === 'user') {
+        userDataArray.push(data);
+        fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
+            if (err) throw err;
+        });
+    }
 }
 
 // Load user's todo list items from previous session.
@@ -91,7 +99,7 @@ function createTaskFromForm() {
     }
 
     // Create task list item and add to DOM.
-    createTask(inputValue);
+    createTask(inputValue, 'user');
 
     // Clear user input field.
     document.getElementById('newTaskInput').value = '';
