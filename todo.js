@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 // ** GLOBAL CONSTS & VARS **
 
 // Requires
@@ -18,7 +17,6 @@ var userDataArray = fs.readFileSync('userdata.txt').toString().split("\n");
 // Error modal handling
 const modal = document.querySelector('.modal');
 const modalCloseButton = document.querySelector('.modal-close-button');
-
 
 
 // ** FUNCTIONS **
@@ -122,7 +120,6 @@ function toggleModal(message) {
 }
 
 
-
 // ** OTHER NON-FUNCTION LOGIC **
 
 // Receive window size from main process (IPC) when window is resized.
@@ -130,7 +127,6 @@ function toggleModal(message) {
 require('electron').ipcRenderer.on('async-resize', (event, message) => {
     document.getElementById('todoList').style.height = ((message - 220).toString() + 'px');
 });
-
 
 
 // ** INITIAL SETUP & NON-FUNCTION EVENT LISTENERS **
