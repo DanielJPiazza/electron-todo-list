@@ -40,11 +40,6 @@ function createTask(data, source) {
     var li = document.createElement('LI');
     var txt = document.createTextNode(data);
     li.appendChild(txt);
-
-    // Toggle 'checked' class on click for new list item.
-    li.addEventListener('click', function(e) {
-        e.target.classList.toggle('checked');
-    });
     
     // Append new list item to task list.
     document.querySelector('UL').appendChild(li);
@@ -54,9 +49,6 @@ function createTask(data, source) {
     txt = document.createTextNode(removeTaskButton);
     span.className = removeTaskButtonClass;
     span.appendChild(txt);
-    span.addEventListener('click', function(e) {
-        e.target.parentNode.remove();
-    });
     li.appendChild(span);
 
     // If new user task, add to user data array and write array to user data file.
@@ -136,6 +128,20 @@ require('electron').ipcRenderer.on('async-resize', (event, message) => {
 
 // Load user's saved data and populate task list.
 createTaskOnSetup(userDataArray);
+
+// Toggle 'checked' class on clicked list items.
+document.getElementById('todoList').addEventListener('click', function(e) {
+    if (e.target.tagName.toLowerCase() === 'li') {
+        e.target.classList.toggle('checked');
+    }
+});
+
+// Remove associated list item for clicked remove task button.
+document.getElementById('todoList').addEventListener('click', function(e) {
+    if (e.target.className === 'removeTaskButton') {
+        e.target.parentNode.remove();
+    }
+});
 
 // Allow 'Enter' key to call createTaskFromForm().
 document.getElementById('newTaskInput').addEventListener('keypress', function(e) {
