@@ -44,8 +44,13 @@ function whichChild(element) {
     return i;
 }
 
-// Writes userDataArray to userdata.txt.
 function updateUserDataFile() {
+    // Add default task if task list is empty.
+    if (userDataArray.length === 0) {
+        userDataArray.push("Enter new tasks or delete this one...");
+    }
+    
+    // Update user data file.
     fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
         if (err) throw err;
     });
@@ -76,17 +81,8 @@ function createTask(data, source) {
 
 // Load user's todo list items from previous session.
 function createTaskOnSetup(data) {
-    if (data.length === 1 && data[0] === "") {    
-        // Add default task if the user's file is empty.
-        createTask("Create a new task or delete this one...");
-    } else if (data.length === 1) {
-        // Avoid calling for loop if only one task.
-        createTask(data[0]);
-    } else {
-        // Pass full array if more than one task.
-        for (var i in data) {
-            createTask(data[i]);
-        }
+    for (var i in data) {
+        createTask(data[i]);
     }
 }
 
