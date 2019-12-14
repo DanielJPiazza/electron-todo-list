@@ -35,6 +35,22 @@ function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
 }
 
+// Determines which LI is removed from the task list.
+function whichChild(element) {
+    var i = 0;
+    while((element = element.previousSibling) != null) {
+        ++i;
+    }
+    return i;
+}
+
+// Writes userDataArray to userdata.txt.
+function updateUserDataFile() {
+    fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
+        if (err) throw err;
+    });
+}
+
 function createTask(data, source) {
     // Create new list item and append user input.
     var li = document.createElement('LI');
@@ -54,14 +70,11 @@ function createTask(data, source) {
     // If new user task, add to user data array and write array to user data file.
     if (source === 'user') {
         userDataArray.push(data);
-        fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
-            if (err) throw err;
-        });
+        updateUserDataFile();
     }
 }
 
 // Load user's todo list items from previous session.
-// Currently the file is 'userdata.txt' stored in the application root.
 function createTaskOnSetup(data) {
     if (data.length === 1 && data[0] === "") {    
         // Add default task if the user's file is empty.
@@ -139,7 +152,14 @@ document.getElementById('todoList').addEventListener('click', function(e) {
 // Remove associated list item for clicked remove task button.
 document.getElementById('todoList').addEventListener('click', function(e) {
     if (e.target.className === 'removeTaskButton') {
+        // Calculate which LI is being removed.
+        var indexForRemoval = whichChild(e.target.parentNode) - 1;
+        // Remove equivalent index from user data array.
+        userDataArray.splice(indexForRemoval, 1);
+        // Remove LI DOM element.
         e.target.parentNode.remove();
+        // Update user data file.
+        updateUserDataFile();
     }
 });
 
