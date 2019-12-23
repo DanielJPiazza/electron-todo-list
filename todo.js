@@ -11,8 +11,17 @@ const fs = require('fs');
 const removeTaskButtonClass = 'removeTaskButton';
 const removeTaskButton = '\u2716';
 
-// Input & output
+// IO & user data file verification (synchronous)
 var userDataFileName = 'userdata.txt';
+try {
+    if (fs.existsSync(userDataFileName)) {
+      // File exists
+    }
+} catch (err) {
+    fs.writeFile('userdata.txt', 'Enter new tasks or delete this one...', (err) => {
+        if (err) throw Error(err);
+    });
+}
 
 // Error modal handling
 const modal = document.querySelector('.modal');
