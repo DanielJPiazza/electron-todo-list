@@ -59,7 +59,7 @@ function updateUserDataFile() {
     
     // Update user data file.
     fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
-        if (err) throw err;
+        if (err) throw Error(err);
     });
 }
 
