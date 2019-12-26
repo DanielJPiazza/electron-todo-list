@@ -145,7 +145,7 @@ function deleteAllTasksPrompt() {
 }
 
 function deleteAllTasksYes() {
-    document.querySelectorAll('UL').forEach(e => e.parentNode.removeChild(e));
+    document.querySelectorAll('LI').forEach(e => e.parentNode.removeChild(e));
 
     if (document.querySelectorAll('LI').length === 0) {
         userDataArray.length = 0;
