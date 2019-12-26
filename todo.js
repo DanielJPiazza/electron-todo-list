@@ -117,8 +117,14 @@ function createTaskFromForm() {
 }
 
 // Display error modal with the passed argument.
-function toggleModal(message) {     
-    document.getElementById('inputErrorMessage').textContent = message;
+function toggleModal(message, isHTML) {     
+    // Allow function to be called with optional argument for HTML parsing.
+    if (isHTML === 'HTML') {
+        document.getElementById('inputErrorMessage').innerHTML = message;
+    } else {
+        document.getElementById('inputErrorMessage').textContent = message;
+    }
+    
     modal.classList.toggle('show-modal');
     
     if (modal.classList.contains('show-modal')) {
@@ -126,6 +132,31 @@ function toggleModal(message) {
     } else {
         setFocusAddTaskField();
     }
+}
+
+// Deletes all tasks, prompting the user to verify the action first.
+// Calls deleteAllTasks() utility function after receiving user confirmation.
+function deleteAllTasksPrompt() {
+    var htmlForModal = 'Are you sure?<br><br>' +
+                       '<button onClick="deleteAllTasksYes()">YES</button> ' +
+                       '<button onClick="deleteAllTasksNo()">NO</button>';
+    
+    toggleModal(htmlForModal, 'HTML');
+}
+
+function deleteAllTasksYes() {
+    document.querySelectorAll('UL').forEach(e => e.parentNode.removeChild(e));
+
+    if (document.querySelectorAll('LI').length === 0) {
+        userDataArray.length = 0;
+        toggleModal(null);
+    }
+
+    updateUserDataFile();
+}
+
+function deleteAllTasksNo() {
+    toggleModal(null);
 }
 
 
