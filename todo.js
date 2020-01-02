@@ -56,10 +56,19 @@ function whichChild(element) {
     return i;
 }
 
-function updateUserDataFile() {
+function updateArrayTotalAndUserData() {
+    // Update user data file.
     fs.writeFile('userdata.txt', userDataArray.join('\n'), (err) => {
         if (err) throw Error(err);
     });
+
+    // Update task total displayed in GUI.
+    updateArrayTotalGUI();    
+}
+
+function updateArrayTotalGUI() {
+    var node = document.getElementById('numberOfTasks');
+    node.textContent = userDataArray.length;
 }
 
 function createTask(data, source) {
@@ -81,7 +90,7 @@ function createTask(data, source) {
     // If new user task, add to user data array and write array to user data file.
     if (source === 'user') {
         userDataArray.push(data);
-        updateUserDataFile();
+        updateArrayTotalAndUserData();
     }
 }
 
@@ -95,6 +104,9 @@ function createTaskOnSetup(data) {
     for (var i in data) {
         createTask(data[i]);
     }
+
+    // Update task total displayed in GUI.
+    updateArrayTotalGUI();
 }
 
 // Create a new list item when 'Add Task' is clicked.
@@ -156,7 +168,7 @@ function deleteAllTasksYes() {
         toggleModal(null);
     }
 
-    updateUserDataFile();
+    updateArrayTotalAndUserData();
 }
 
 
@@ -196,7 +208,7 @@ document.getElementById('todoList').addEventListener('click', function(e) {
         // Remove LI DOM element.
         e.target.parentNode.remove();
         // Update user data file.
-        updateUserDataFile();
+        updateArrayTotalAndUserData();
     }
 });
 

@@ -19,9 +19,11 @@
         <span class="smallButton" onclick="createTaskFromForm()" maxlength="40">Add Task</span>
         <span class="smallButton" id="exitButton" onclick="closeWindow()">Exit</span>
         <span class="smallButton" id="deleteAllButton" onclick="deleteAllTasksPrompt()">Delete All Tasks</span>
+        
         <div class="checkbox">
           <input type="checkbox" id="devmode" onclick="toggleDevMode()"></input>
           <label for="devmode">Toggle Dev Mode</label>
+          <span style="margin-left: 25px;">Total Tasks: <span id="numberOfTasks"></span></span>
         </div>
 
         <!-- User input error modal. -->
