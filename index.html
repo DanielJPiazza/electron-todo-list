@@ -15,10 +15,14 @@
       <input type="text" id="newTaskInput" placeholder="Add task..." autofocus>
       
       <div>
-        <!-- 'Add Task' and 'Exit' buttons. -->
+        <!-- User Controls -->
         <span class="smallButton" onclick="createTaskFromForm()" maxlength="40">Add Task</span>
         <span class="smallButton" id="exitButton" onclick="closeWindow()">Exit</span>
         <span class="smallButton" id="deleteAllButton" onclick="deleteAllTasksPrompt()">Delete All Tasks</span>
+        <div class="checkbox">
+          <input type="checkbox" id="devmode" onclick="toggleDevMode()"></input>
+          <label for="devmode">Toggle Dev Mode</label>
+        </div>
 
         <!-- User input error modal. -->
         <div class="modal">

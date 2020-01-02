@@ -42,6 +42,11 @@ function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
 }
 
+function toggleDevMode() {
+    remote.getCurrentWindow().webContents.toggleDevTools();
+    remote.getCurrentWindow().maximize();
+}
+
 // Determines which LI is removed from the task list.
 function whichChild(element) {
     var i = 0;
