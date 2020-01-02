@@ -143,7 +143,7 @@ function toggleModal(message, isHTML) {
 function deleteAllTasksPrompt() {
     var htmlForModal = 'Are you sure?<br><br>' +
                        '<button onClick="deleteAllTasksYes()">YES</button> ' +
-                       '<button onClick="deleteAllTasksNo()">NO</button>';
+                       '<button onClick="toggleModal(null)">NO</button>';
     
     toggleModal(htmlForModal, 'HTML');
 }
@@ -157,10 +157,6 @@ function deleteAllTasksYes() {
     }
 
     updateUserDataFile();
-}
-
-function deleteAllTasksNo() {
-    toggleModal(null);
 }
 
 
