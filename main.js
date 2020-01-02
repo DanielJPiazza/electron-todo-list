@@ -6,9 +6,9 @@ function createWindow() {
 	// Create the browser window.
 	let win = new BrowserWindow({
 		width: 450,
-		height: 550,
+		height: 570,
 		minWidth: 450,
-		minHeight: 550,
+		minHeight: 570,
 		webPreferences: {
 			nodeIntegration: true
 		}
