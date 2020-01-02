@@ -172,7 +172,7 @@ function deleteAllTasksYes() {
 }
 
 
-// ** OTHER NON-FUNCTION LOGIC **
+// ** ELECTRON IPC COMMUNICATION (NON-REMOTE WRAPPER) **
 
 // Receive window size from main process (IPC) when window is resized.
 // Set height of todo list accordingly to avoid main window scrollbar.
