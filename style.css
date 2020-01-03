@@ -1,4 +1,4 @@
-/* General styles. */
+/* General */
 * {
   background-color: rgb(12, 12, 12);
   color: white;
@@ -11,7 +11,7 @@
   margin: 10px 10px;
 }
 
-/* Add Task and Exit button styling. */
+/* User control buttons */
 .smallButton {
   background-color: white;
   border: none;
@@ -33,7 +33,19 @@
   margin-left: 5px;
 }
 
-/* To-do list styling. */
+/* Dev Mode toggle and task counter */
+#devmodelabel {
+  margin-right: 25px;
+}
+
+.checkbox {
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-top: -8px;
+  margin-bottom: 15px;
+}
+
+/* To-do list */
 #todoList {
   list-style: none;
   margin: 0;
@@ -60,7 +72,14 @@
   transition: 0.3s;
 }
 
-/* Remove task button styling. */
+/* Add check mark to task when clicked ('checked' class is toggled in todo.js) */
+.checked::before {
+  color: rgb(56, 230, 56);
+  content: '\2713\00A0\00A0';
+  font-size: 11px;
+}
+
+/* Remove task button */
 .removeTaskButton {
   float: right;
   color: rgb(231, 39, 39);
@@ -73,14 +92,7 @@
   transition: 0.3s;
 }
 
-/* Add check mark to task when clicked ('checked' class is toggled in todo.js). */
-.checked::before {
-  color: rgb(56, 230, 56);
-  content: '\2713\00A0\00A0';
-  font-size: 11px;
-}
-
-/* Input error modal. */
+/* Warning modal */
 .modal {
   position: fixed;
   left: 0;
@@ -90,8 +102,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transform: scale(1.1);
-  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  transition: 0.2s;
 }
 
 .modal-content {
@@ -108,10 +119,11 @@
 
 .modal-close-button {
   float: right;
-  width: 1.5rem;
-  line-height: 1.5rem;
+  margin-top: 5px;
+  width: 1.3rem;
+  line-height: 1.3rem;
   text-align: center;
-  border-radius: 0.25rem;
+  border-radius: 0.15rem;
   background-color: lightgray;
 }
 
@@ -130,6 +142,35 @@
   background-color: white;
   color: red;
   font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.modal button {
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  text-align: center;
+  display: inline-block;
+  font-size: 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+#deleteAllTasksYes {
+  background-color: #8b0000;
+}
+
+#deleteAllTasksYes:hover {
+  background-color: #b93434;
+}
+
+#deleteAllTasksNo {
+  background-color: #3f746d;
+}
+
+#deleteAllTasksNo:hover {
+  background-color: #52928a;
 }
 
 #smallEmptyRow {

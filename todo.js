@@ -113,7 +113,7 @@ function createTaskFromForm() {
     var inputRegex = new RegExp('^\\S');
     if (!inputRegex.test(inputValue)) {
         // If check fails, display error message.
-        toggleModal('Tasks must contain text.');
+        toggleModal('Tasks must contain text');
         return false;
     }
 
@@ -148,9 +148,11 @@ function toggleModal(message, isHTML) {
 
 // Deletes all tasks, prompting the user to verify the action first.
 function deleteAllTasksPrompt() {
-    var htmlForModal = 'Are you sure?<br><br>' +
-                       '<button onClick="deleteAllTasksYes()">YES</button> ' +
-                       '<button onClick="toggleModal(null)">NO</button>';
+    var htmlForModal = 'Are you sure?' +
+                       '<button style="margin-left: 45px;" id="deleteAllTasksYes" ' +
+                       'onClick="deleteAllTasksYes()">yes</button> ' +
+                       '<button style="margin-left: 2px;" id="deleteAllTasksNo" ' +
+                       'onClick="toggleModal(null)">no</button>';
     
     toggleModal(htmlForModal, 'HTML');
 }
