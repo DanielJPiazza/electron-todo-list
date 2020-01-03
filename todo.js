@@ -1,7 +1,7 @@
 'use strict';
 
-
-// ** GLOBAL CONSTS & VARS **
+// -----------------------------------------------------
+// ** GLOBAL CONSTANTS
 
 // Requires
 const remote = require('electron').remote
@@ -12,26 +12,23 @@ const removeTaskButtonClass = 'removeTaskButton';
 const removeTaskButton = '\u2716';
 
 // IO & user data file verification (synchronous)
-var userDataFileName = 'userdata.txt';
-try {
-    if (fs.existsSync(userDataFileName)) {
-      // File exists
-    }
-} catch (err) {
-    fs.writeFile('userdata.txt', 'Enter new tasks or delete this one...', (err) => {
-        if (err) throw Error(err);
-    });
-}
+const userDataFileName = 'userdata.txt';
 
-// Error modal handling
+// Error modal
 const modal = document.querySelector('.modal');
 const modalCloseButton = document.querySelector('.modal-close-button');
 
 
+// -----------------------------------------------------
 // ** FUNCTIONS **
 
 function closeWindow() {
     remote.getCurrentWindow().close()
+}
+
+function toggleDevMode() {
+    remote.getCurrentWindow().webContents.toggleDevTools();
+    remote.getCurrentWindow().maximize();
 }
 
 function setFocusAddTaskField(){
@@ -40,20 +37,6 @@ function setFocusAddTaskField(){
 
 function removeFocusAddTaskField() {
     document.getElementById('newTaskInput').blur();
-}
-
-function toggleDevMode() {
-    remote.getCurrentWindow().webContents.toggleDevTools();
-    remote.getCurrentWindow().maximize();
-}
-
-// Determines which LI is removed from the task list.
-function whichChild(element) {
-    var i = 0;
-    while((element = element.previousSibling) != null) {
-        ++i;
-    }
-    return i;
 }
 
 function updateArrayTotalAndUserData() {
@@ -66,9 +49,19 @@ function updateArrayTotalAndUserData() {
     updateArrayTotalGUI();    
 }
 
+// Updates the total task number in the GUI.
 function updateArrayTotalGUI() {
     var node = document.getElementById('numberOfTasks');
     node.textContent = userDataArray.length;
+}
+
+// Determines which LI is removed from the task list.
+function whichChild(element) {
+    var i = 0;
+    while((element = element.previousSibling) != null) {
+        ++i;
+    }
+    return i;
 }
 
 function createTask(data, source) {
@@ -95,14 +88,16 @@ function createTask(data, source) {
 }
 
 // Load user's todo list items from previous session.
-function createTaskOnSetup(data) {
+function createTaskOnSetup(taskData) {
+    // If user task list is empty, create the default task.
     if (userDataArray[0] === '') {
         userDataArray.length = 0;
         userDataArray.push("Enter new tasks or delete this one...");
-    }    
+    }
     
-    for (var i in data) {
-        createTask(data[i]);
+    // Create tasks
+    for (var i in taskData) {
+        createTask(taskData[i]);
     }
 
     // Update task total displayed in GUI.
@@ -141,6 +136,7 @@ function toggleModal(message, isHTML) {
         document.getElementById('inputErrorMessage').textContent = message;
     }
     
+    // Display or hide the modal, depending on the previous state.
     modal.classList.toggle('show-modal');
     
     if (modal.classList.contains('show-modal')) {
@@ -151,7 +147,6 @@ function toggleModal(message, isHTML) {
 }
 
 // Deletes all tasks, prompting the user to verify the action first.
-// Calls deleteAllTasks() utility function after receiving user confirmation.
 function deleteAllTasksPrompt() {
     var htmlForModal = 'Are you sure?<br><br>' +
                        '<button onClick="deleteAllTasksYes()">YES</button> ' +
@@ -160,6 +155,7 @@ function deleteAllTasksPrompt() {
     toggleModal(htmlForModal, 'HTML');
 }
 
+// Deletes all tasks upon user confirmation in deleteAllTasksPrompt().
 function deleteAllTasksYes() {
     document.querySelectorAll('LI').forEach(e => e.parentNode.removeChild(e));
 
@@ -172,7 +168,8 @@ function deleteAllTasksYes() {
 }
 
 
-// ** ELECTRON IPC COMMUNICATION (NON-REMOTE WRAPPER) **
+// ---------------------------------------------
+// ** ELECTRON IPC COMMUNICATION (NON-REMOTE) **
 
 // Receive window size from main process (IPC) when window is resized.
 // Set height of todo list accordingly to avoid main window scrollbar.
@@ -181,9 +178,21 @@ require('electron').ipcRenderer.on('async-resize', (event, message) => {
 });
 
 
+// -----------------------------------------------------
 // ** INITIAL SETUP & NON-FUNCTION EVENT LISTENERS **
 
-// Read user data file and create task list on run.
+// Check for user data file, and create new file if missing.
+try {
+    if (fs.existsSync(userDataFileName)) {
+      // File exists
+    }
+} catch (err) {
+    fs.writeFile('userdata.txt', 'Enter new tasks or delete this one...', (err) => {
+        if (err) throw Error(err);
+    });
+}
+
+// Read user data file and create task list.
 var userDataArray;
 fs.readFile(userDataFileName, (err, data) => {
     if (err) console.error(err);
