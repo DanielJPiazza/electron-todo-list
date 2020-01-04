@@ -1,7 +1,7 @@
 'use strict';
 
 // -----------------------------------------------------
-// ** GLOBAL CONSTANTS
+// ** GLOBAL CONSTANTS & VARIABLES
 
 // Requires
 const remote = require('electron').remote
@@ -18,6 +18,9 @@ const userDataFileName = 'userdata.txt';
 const modal = document.querySelector('.modal');
 const modalCloseButton = document.querySelector('.modal-close-button');
 
+// Are dev tools open?
+var devToolsOpen = false;
+
 
 // -----------------------------------------------------
 // ** FUNCTIONS **
@@ -27,8 +30,16 @@ function closeWindow() {
 }
 
 function toggleDevMode() {
+    // Only maximize if dev tools are closed and window isn't already maximized.
+    if (!remote.getCurrentWindow().isMaximized() && !devToolsOpen) {
+        remote.getCurrentWindow().maximize();
+    }
+    
+    // Toggle dev tools.
     remote.getCurrentWindow().webContents.toggleDevTools();
-    remote.getCurrentWindow().maximize();
+
+    // Toggle devToolsOpen flag to opposite boolean.
+    devToolsOpen = devToolsOpen ? false : true;
 }
 
 function setFocusAddTaskField(){
