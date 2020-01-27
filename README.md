@@ -1,6 +1,6 @@
 # Electron To-do List
 
-Simple to-do list using Electron.
+Simple to-do list using Electron. [Click to get started](#getting-started)
 
 ![image](https://github.com/DanielJPiazza/electron-todo-list/blob/master/GitHub_Reference/screenshot.png)
 
