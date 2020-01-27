@@ -10,7 +10,7 @@ Clone repo.<br>
 Navigate to project root in CLI.<br>
 ```
 npm install electron --save-dev
-npm run
+npm start
 ```
 NOTE: Tasks are saved in `userdata.txt` in project root.
 
