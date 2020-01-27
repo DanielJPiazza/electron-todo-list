@@ -18,5 +18,5 @@ npm run
 
 Last tested with:<br>
 
-[Node.js](https://nodejs.org/en/) (v12.13.1)
+[Node.js](https://nodejs.org/en/) (v12.13.1)<br>
 [Electron](https://www.electronjs.org/) (7.1.10)
