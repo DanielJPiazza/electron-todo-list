@@ -12,7 +12,7 @@ Navigate to project root in CLI.<br>
 npm install electron --save-dev
 npm run
 ```
-<br>NOTE: Tasks are saved in `userdata.txt` in project root.
+NOTE: Tasks are saved in `userdata.txt` in project root.
 
 ### Prerequisites
 
